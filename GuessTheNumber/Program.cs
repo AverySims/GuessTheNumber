@@ -2,7 +2,8 @@
 {
 	internal class Program
 	{
-		// Random number max integer
+		// "Randomly generate a number between 1 and 100 (inclusive)"
+		private static int rndMin = 1;
 		private static int rndMax = 100;
 
 		// setting it to -1 so the rndVal and the userVal cannot be the same number when the program starts
@@ -12,14 +13,15 @@
 		private static int attemptCounter = 0;
 
 		// set to 'true' if you want to know what the random number is when the program starts.
-		public static bool debugRndNum = true;
+		public static bool debugRndNum = false;
 
 		static void Main(string[] args)
 		{
 			// random number generation
 			Random rnd = new Random();
-			int rndVal = rnd.Next(rndMax);
+			int rndVal = rnd.Next(rndMin, rndMax);
 
+			// debug check
 			if (debugRndNum)
 				PrintValue(rndVal);
 
