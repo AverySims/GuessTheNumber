@@ -2,51 +2,67 @@
 {
 	internal class Program
 	{
+		// Random number max integer
+		private static int rndMax = 100;
+
+		// setting it to -1 so the rndVal and the userVal cannot be the same number when the program starts
+		private static int userVal = -1;
+
+		// tracking how many times you guessed
+		private static int attemptCounter = 0;
+
+		// set to 'true' if you want to know what the random number is when the program starts.
+		public static bool debugRndNum = true;
+
 		static void Main(string[] args)
 		{
-			// Random number max integer
-			int rndMax = 100;
-
-			// set to 'true' if you want to know what the random number is when the program starts.
-			bool debugRndNum = false;
-
 			// random number generation
 			Random rnd = new Random();
 			int rndVal = rnd.Next(rndMax);
 
-			// setting it to -1 so the rndVal and the userVal cannot be the same number when the program starts
-			int userVal = -1;
-
-			// tracking how many times you guessed
-			int attemptCounter = 0;
-
 			if (debugRndNum)
-				Console.WriteLine("Random value is: " + rndVal);
+				PrintValue(rndVal);
 
 			while (rndVal != userVal)
 			{
 				Console.WriteLine("Guess the number");
 				userVal = int.Parse(Console.ReadLine());
 
-				if (userVal > rndVal)
-					Console.WriteLine("Too high, guess lower.");
-
-				else if (userVal < rndVal)
-					Console.WriteLine("Too low, guess higher.");
-
-				else
-					Console.WriteLine("Correct! Good guess.\n");
+				Console.WriteLine(GetGuessHint(userVal, rndVal));
 
 				// incrementing the attempt counter for every guess
 				attemptCounter++;
 			}
 
-			// changing the wording based on # of attempts
-			string attemptPlurality = attemptCounter > 1 ? "attempts" : "attempt";
+			PrintFinalResult(attemptCounter);
+		}
 
-			// appending strings to create the final msg
-			Console.WriteLine("You guessed it in " + attemptCounter + " " + attemptPlurality);
+		private static string GetGuessHint(int guess, int goal)
+		{
+			if (guess > goal)
+				return "Too high, guess lower.";
 
+			else if (guess < goal)
+				return "Too low, guess higher.";
+
+			else
+				return "Correct! Good guess.\n";
+		}
+
+		private static void PrintFinalResult(int count)
+		{
+			Console.WriteLine("You guessed it in " + count + " " + GetAttemptVerbage(count));
+		}
+
+		private static string GetAttemptVerbage(int count)
+		{
+			return count > 1 ? "attempts" : "attempt";
+		}
+
+		// debug function
+		public static void PrintValue(int val)
+		{
+			Console.WriteLine("Value is: " + val);
 		}
 	}
 }
