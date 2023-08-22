@@ -3,7 +3,7 @@
  * make console applications more lightweight and less bloated
  */
 
-namespace GuessTheNumber
+namespace HigherLower
 {
 	internal class SimpleConsoleFunctions
 	{
@@ -66,6 +66,11 @@ namespace GuessTheNumber
 		public static void PrintBlank()
 		{
 			Console.WriteLine("");
+		}
+
+		public static void PrintValue(int val)
+		{
+			Console.WriteLine("Value is: " + val);
 		}
 
 		public static void PrintInvalidSelection()
